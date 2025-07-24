@@ -72,7 +72,7 @@ public class MemberController {
 			new MemberMenu().displyNodate("전체조회 결과가 없습니다");
 		}else { // 뭐라도 조회된 데이터 있을 경우
 			new MemberMenu().displayMemberList(list); 
-			// 컨트롤러에서 출력 x 그래서 멤버메뉴에서!
+			// 컨트롤러에서는 출력하지마셈 그래서 멤버메뉴에서!
 		}
 	}
 	
@@ -142,5 +142,7 @@ public class MemberController {
 
 		
 	}
+	
+
 	
 }

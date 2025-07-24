@@ -40,6 +40,7 @@ public class MemberMenu {
 			switch(menu){
 			case 1: inputMember(); break; // 멤버메뉴의 메소드인거임
 			case 2: mc.selectList(); break; // 얘는 왜 여기에 바로??????????????????
+			
 			case 3: //String userId = inputMemberId(); 
 					//mc.selectByUserId(userId); // 한줄 위 userId를 여기로 넘겨줘야 db랑 연결 가능 => 컨트롤러로~
 					mc.selectByUserId(inputMemberId()); // 이렇게 줄일 수 있지
