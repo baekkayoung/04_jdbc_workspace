@@ -132,7 +132,7 @@ public class EmployeeDao {
 				+  "SET EMAIL = ? "
 				+     ", PHONE = ?"
 				+     ", SALARY = ? "
-				+ 	"WHERE EMP_ID = ?";
+				+ 	"WHERE EMP_NAME = ?";
 		
 		
 		try {
