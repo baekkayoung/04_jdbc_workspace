@@ -16,8 +16,6 @@ public class MemberMenu {
 	
 	// MembaeController 객체 생성
 	private MemberController mc = new MemberController();
-
-	
 	
 	/**
 	 *  사용자가 보게 될 첫 화면(메인메뉴)
@@ -45,7 +43,8 @@ public class MemberMenu {
 					mc.selectByUserId(inputMemberId()); // 이렇게 줄일 수 있지
 					
 					break; // 이렇게 먼저 메소드명를 정해두고 나중에 만들면 되는 거임
-			case 4: //String keyword = inputMemberName(); // 처음엔 빨간줄 , 메소드 만들러 가야됨 1 3 2번 순이니까... 그리고 변수의 자료형이 String이니까 을 리턴하게 만들어야됨 
+			case 4: //String keyword = inputMemberName(); // 처음엔 빨간줄 , 메소드 만들러 가야됨 1 3 2번 순이니까... 
+				    //그리고 변수의 자료형이 String이니까 을 리턴하게 만들어야됨 
 					//mc.selectByUserName(keyword); // keyword를 가지고 controller로 가야됨. 아직 없으니까 컴파일 에러 상태 => 컨트롤러로 가서 메소드 만들기
 					
 					//이렇게 줄일 수 있음
@@ -136,13 +135,11 @@ public class MemberMenu {
 	public void displayMemberList(ArrayList<Member> list) {
 
 		System.out.println("\n 조회된 데이터는 다음과 같습니다.");
-		
 		/* 단순 for문
 		for(int i = 0; i<list.size(); i++) {
 			System.out.println(list.get(i));
 		}
 		*/
-		
 		// 향상된 for문
 		// list의 자료형은 Member, Arr~는 아님
  		for(Member m : list) { // m=list.get(0) -> m=list.get(1), ...

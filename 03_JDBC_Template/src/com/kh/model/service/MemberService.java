@@ -1,6 +1,7 @@
 package com.kh.model.service;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 
 import static com.kh.common.JDBCTemplate.*; // static .* 
@@ -14,6 +15,8 @@ public class MemberService {
 		
 		// 1) jdbc driver 등록
 		// 2) Connection 객체 생성
+		//Class.forName("oracle.jdbc.driver.OracleDriver");
+		//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
 		Connection conn = getConnection();
 		
 		int result = new MemberDao().insertMember(conn, m);

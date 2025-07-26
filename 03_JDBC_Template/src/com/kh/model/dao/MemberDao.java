@@ -50,13 +50,17 @@ public class MemberDao {
 	public int insertMember(Connection conn, Member m) {
 		
 		int result = 0 ;	
-		
+		//Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		String sql = "INSERT INTO MEMBER VALUES(SEQ_USERNO.NEXTVAL, ? , ? , ? , ? , ? , ? , ? , ? , ? , SYSDATE)"; // 홀더(?)를 이용해서 자리만 뚫어놓은 것임
 		
 		try {
 			
+			/*
+			 * Class.forName("oracle.jdbc.driver.OracleDriver");
+			 *conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
+			*/
 			conn = getConnection(); // 내가 만든 스태틱메소드로 줄일 수 있음!
 			
 			pstmt = conn.prepareStatement(sql); 
@@ -73,6 +77,15 @@ public class MemberDao {
 			
 			result =pstmt.executeUpdate(); 
 			
+			/*
+			 * if(result> 0) {
+				conn.commit();
+			}else {
+				conn.rollback();
+			}
+			
+			 * 
+			 * */
 			
 
 		} catch (SQLException e) {
@@ -89,12 +102,18 @@ public class MemberDao {
 		// select문 (여러행) => ResultSet => ArrayList
 		ArrayList<Member> list =new ArrayList<Member>(); //[]
 	
+		//Connection conn =null;
 		PreparedStatement pstmt =null;
 		ResultSet rset = null;
 		
 		String sql = "SELECT * FROM MEMBER";
 		
 		try {
+			/*
+			 * Class.forName("oracle.jdbc.driver.OracleDriver");
+			 * conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
+			 */
+			//conn = getConnection();
 			
 			pstmt = conn.prepareStatement(sql); // 물음표가 대체하는 작업해야되는데 지금 sql에는 ? 없으니까 안해도 됨
 			
@@ -131,15 +150,18 @@ public class MemberDao {
 	public Member selectByUserId(Connection conn, String userId) {
 		// select 문 => 한 행만 조회하겠지 아이디는 고유하니까. => ResultSet => 하나니까 걍 Member객체 하나만 있어도 괜찮
 		Member m = null;
-
+		
+		//Connection conn =null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = "SELECT * FROM MEMBER WHERE USERID = ?"; // Prepared스테이트먼트는 홀더 (?) 사용
 		
 		try {
-
-			
+			/*
+			 * Class.forName("oracle.jdbc.driver.OracleDriver");
+			 * conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
+			 */
 			pstmt = conn.prepareStatement(sql); // 미완성된 sql문 => 바로 돌리면 큰일남 => 대체값으로 채워준 다음에 돌려야 함 받아온 유저아이디를 이용!
 			
 			pstmt.setString(1, userId);
@@ -178,7 +200,7 @@ public class MemberDao {
 		// select문 => 여러행이 나오니까 => ResultSet => ArrayList에 담아야겠다.
 		
 		ArrayList<Member> list = new ArrayList<Member>();
-
+		//Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -191,6 +213,12 @@ public class MemberDao {
 		String sql = "SELECT * FROM MEMBER WHERE USERNAME LIKE ?";
 		
 		try {
+			
+			/*
+			 * Class.forName("oracle.jdbc.driver.OracleDriver");
+			 * conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
+			 * */
+			
 			pstmt = conn.prepareStatement(sql); // ?가 있으니까 미완성 쿼리
 			
 			//해결방법1의 sql문일 경우
@@ -223,7 +251,7 @@ public class MemberDao {
 		} finally {
 			close(rset);
 			close(pstmt);
-		
+			// conn.close();
 			
 		} return list;
 		
@@ -232,7 +260,8 @@ public class MemberDao {
 	public int updateMember(Connection conn, Member m) { 
 		
 		int result = 0 ;
-
+		
+		//Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		String sql = "UPDATE MEMBER "  //미완성쿼리.?
@@ -246,7 +275,11 @@ public class MemberDao {
 		
 		try { // try문 안에 pstmt의 값 해주는거랑 클래스~컨 스테이트먼트 다 ?
 			
-			
+			/*
+			 * 	Class.forName("oracle.jdbc.driver.OracleDriver");
+				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
+			 * 
+			 */
 
 			pstmt = conn.prepareStatement(sql);
 			
@@ -294,11 +327,14 @@ public class MemberDao {
 		
 		
 		int result = 0;
+		//Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		String sql = "DELETE FROM MEMBER WHERE USERID = ?";
 		
 		try {
+			//Class.forName("oracle.jdbc.driver.OracleDriver");
+			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, userId);

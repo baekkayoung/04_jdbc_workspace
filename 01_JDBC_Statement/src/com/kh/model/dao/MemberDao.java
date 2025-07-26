@@ -55,7 +55,7 @@ public class MemberDao {
 		stmt = conn.createStatement();
 		
 		// 4,5) sql문을 전달하면서 실행 후 결과 받는 작업!
-		result = stmt.executeUpdate(sql); // 쿼리를 돌리면 int 행수를 반환
+		result = stmt.executeUpdate(sql); // 쿼리를 돌리면 int 행수를 반환!
 		
 		// 6) 트렌젝션 처리
 		if(result>0) {
@@ -120,7 +120,6 @@ public class MemberDao {
 			rset = stmt.executeQuery(sql);
 			
 			while(rset.next()) { // while문은 true일 때만 돌기 때문에 rset.next()에 값이 없으면 멈춤
-				
 				Member m = new Member(); // 기본생성자 초기값이 다 들어감 -> 그래서 db로부터 컬럼값을 가져오는 것
 				// ArrayList<Member> list = new ArrayList<Member>(); 
 //				들어가면 안되는 이유? 무한 반복
@@ -173,7 +172,7 @@ public class MemberDao {
 	 * @return : 검색된 결과가 있으면 생성이 된 Member 객체를, 결과가 없으면 null을 반환한다. => 얘를 호출한 컨트롤러로
 	 */
 	public Member selectByUserId(String userId) { // 컨트롤러에서 받아온 값
-		// select문은(최대 한행 )=> ResultSet 객체에 담아야 
+		// select문은(최대 한행)=> ResultSet 객체에 담아야 
 		// 한 행나오니까 ArrayList 필요 없음! Member 객체 한개만 있으면 될듯?
 		
 		// 필요한 변수들 셋팅
@@ -247,7 +246,8 @@ public class MemberDao {
 	 * @param keyword : 사용자가 입력한 keyword 검색 요청한 keyword의 값이 있다.
 	 * @return  부른 컨트롤러로 ㄱㄱ
 	 */
-	public ArrayList<Member> selectByUserName(String keyword) { // 얘도 다오형에서 자료형 변수로 받아줘야 어떤 자료형의 키워드인지 알지
+	public ArrayList<Member> selectByUserName(String keyword) { 
+		// 얘도 다오형에서 자료형 변수로 받아줘야 어떤 자료형의 키워드인지 알지
 		// select문 수행 (키워드니까 여러 행 나옴) => ResultSet => ArrayList로 짜야함!! 여러행이면 무조건! 하나면 아까 멤버객체m으로 해도는거고
 		
 		
@@ -280,6 +280,14 @@ public class MemberDao {
 								   rset.getDate("enrolldate"))); // 이 리스트에 Member 밖에 못 들어옴 => 위에서 어리이리스트멤버형으로
 			}
 			
+			/*
+			 * 
+			 * select문으로 입력해서 oracle에 나온 결과가 sql에 저장된거죠? 그거의 결과값이 sql에 담겨서 그걸 rset에 저장한거고
+			 * 반복문을 통해서 list에 한 줄 한줄 담은거고? 
+			 * 
+			 * 
+			 * */
+			
 		} catch (ClassNotFoundException e) { //이런 클래스가 없으면? 
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -309,7 +317,7 @@ public class MemberDao {
 		
 		Connection conn = null;
 		Statement stmt = null;
-		String sql = "UPDATE MEMBER " // m.에 있는 비밀번호가 꺼내지겟지/
+		String sql = "UPDATE MEMBER " // m.에 있는 비밀번호가 꺼내지겟지 사용자가 입력한/
 					+ "SET USERPWD = " +"'" + m.getUserPwd() + "'"
 					+     ", EMAIL = " + "'" +m.getEmail() + "'"
 					+     ", PHONE = " + "'" + m.getPhone()	+ "'"
@@ -367,7 +375,6 @@ public class MemberDao {
 		// 이제 드라이브 등록~ 연결하는 준비
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
 			stmt = conn.createStatement();
 			

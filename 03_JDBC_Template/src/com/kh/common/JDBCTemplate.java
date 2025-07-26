@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// 공통 템플릿 (매번 반복적으로 작성될 코드를 메소드로 정의해둘거임)
+	// 공통 템플릿 (매번 반복적으로 작성될 코드를 메소드로 정의해둘거임)
 
 public class JDBCTemplate {
 	
@@ -25,7 +25,7 @@ public class JDBCTemplate {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc"); // 디비에 저장
-			
+	
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

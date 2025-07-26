@@ -117,10 +117,14 @@ public class MemberController {
 		m.setEmail(email);
 		m.setPhone(phone);
 		m.setAddress(address); // 적어도 이 다섯개는 내가 원하는 값으로 변화 다른 건 초기값이 있음.
+		// Member m = new Member(userId, userPwd, email, phone, address); -> vo에 이거랑 같은 매개변수 생성자가 있으면!
 		
-		new MemberDao().updateMember(m); // m에 담은 것들 다오로 넘긴다.
+		//new MemberDao().updateMember(m); // m에 담은 것들 다오로 넘긴다.
 		
 		int result = new MemberDao().updateMember(m); // 담아온 것들을 result에 넣음. int형. 1이상이면 밑에 
+		/*
+		 * 이렇게 있으면 위에거는삭제해도 되는건가?
+		 * */
 		
 		if (result > 0 ) {
 			new MemberMenu().displaySuccess("성공적으로 회원 정보가 변경 되었습니다");

@@ -35,7 +35,6 @@ public class MemberDao {
 	 * 		1) Connection 객체를 통해 PreparedStatment 객체 생성 : pstmt = conn.preparedStatement(여기에 미완성된 sql문 | 완성이 된 sql문);
 	 *      2) pstmt에 담긴 sql문이 미완성 상태일 경우 우선은 완성시켜야됨. pstmt.setXXX(1, "대체할값");
 	 *      3) 완성된 sql문 실행 결과 받기 : rusult = pstmt.executeXXXX(); 앞에서 이미 전달했기 때문에 ()안에 비워두기
-
 	 *      update member set user_pwd =?
 	 *      				  user_phone =?..
 	 *      
@@ -50,7 +49,6 @@ public class MemberDao {
 		// insert문 => 처리된 행수 => 트렌젝션 처리
 		
 		int result = 0 ;
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -61,7 +59,6 @@ public class MemberDao {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","jdbc","jdbc");
 			
 			pstmt = conn.prepareStatement(sql); //원래 그냥 Statement에서는 괄호 안에 없었는데 여기는 sql을 줌

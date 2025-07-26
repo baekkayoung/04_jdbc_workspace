@@ -68,7 +68,7 @@ public class TestRun {
 		try { //1) jdbc Driver 등록
 			Class.forName("oracle.jdbc.driver.OracleDriver"); // 클래스를 등록하는 메소드, // 패키지(소문자).클래스(낙타)
 			
-			 System.out.println("jdbc driver 등록 성공!!"); //ojdbc ??
+			 System.out.println("jdbc driver 등록 성공!!");
 			 // OracleDriver 이건 자바에서 제공하는 클래스가 아님!!
 			 // 패키ㅣㅈ명을 보면 oracle로 시작함..!
 			 // 그럼 어케해야하나? => ojdbc6.jar 파일을 등록해줘야함!
