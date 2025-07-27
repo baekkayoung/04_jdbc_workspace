@@ -22,8 +22,9 @@ public class ProductService {
 	}
 	
 	public int insertProduct(Product p) {
-		Connection conn = getConnection();
 		
+		Connection conn = getConnection();
+
 		int result = new ProductDao().insertProduct(conn, p);
 		
 		if (result > 0) {

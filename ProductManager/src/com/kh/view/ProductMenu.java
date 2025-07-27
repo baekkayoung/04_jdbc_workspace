@@ -96,14 +96,14 @@ public class ProductMenu {
 		String pName = sc.nextLine();
 		
 		System.out.println("가격 : ");
-		int price = sc.nextInt();
+		String price = sc.nextLine();
 		sc.nextLine();
 		
 		System.out.println("상세 설명 : ");
 		String description =sc.nextLine();
 		
 		System.out.println("재고 : ");
-		int stock = sc.nextInt();
+		String stock = sc.nextLine();
 		
 		mc.insertProduct(productId, pName, price, description, stock);
 		
@@ -118,14 +118,13 @@ public class ProductMenu {
 		String pName = sc.nextLine();
 		
 		System.out.println("변경할 가격 : ");
-		int price = sc.nextInt();
-		sc.nextLine();
+		String price = sc.nextLine();
 		
 		System.out.println("변경할 상세 설명 : ");
 		String description = sc.nextLine();
 		
 		System.out.println("변경할 재고 수량 : ");
-		int stock = sc.nextInt();
+		String stock = sc.nextLine();
 		
 		mc.updateProduct(productId, pName, price, description, stock);
 		

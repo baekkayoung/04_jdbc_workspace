@@ -41,50 +41,22 @@ public class MemberDao {
 	}
 	
 	
-	
-		
-	/*
-	 * * Statement와 PreparedStatement
-	 * - 둘 다 sql문 실행하고 결과를 받아내는 객체
-	 * 
-	 * * Statement와 PreparedStatement 차이점
-	 * - Statement 같은 경우 sql문을 바로 전달하면서 실행시키는 객체
-	 * (즉, sql문을 완성 형태로 만들어 둬야함! 사용자가 입력한 값이 다 채워진 형태로!! stmt.executeUpdate(sql);)
-	 * 
-	 * 		> 기존의 statement 방식
-	 * 		1) Connection 객체를 통해 Statement 객체 생성 : stmt = conn.CreateStatement();
-	 * 		2) Statement 객체를 통해 쿼리를 돌렸는데, 이때 반드시 완성된 sql문을 실행 및 결과 받기 : 결과 =executeXXXX(완성된 sql);
-	 * 		
-	 * - PreparedStament 같은 경우 "미완성된 sql문"을 잠시 보관해둘 수 있는 객체
-	 * (즉, 사용자가 입력한 값들을 채워두지 않고 각각 들어갈 공간을 확보만 미리 해놓아도 됨!)
-	 * 단, 해당 sql문 복격적으로 실행하기 전에는 빈 공간을 사용자가 입력한 값으로 채워서 실행하긴 해야함
-	 * 		
-	 * 		> preparedStatement 방식
-	 * 		1) Connection 객체를 통해 PreparedStatment 객체 생성 : pstmt = conn.preparedStatement(여기에 미완성된 sql문 | 완성이 된 sql문);
-	 *      2) pstmt에 담긴 sql문이 미완성 상태일 경우 우선은 완성시켜야됨. pstmt.setXXX(1, "대체할값");
-	 *      3) 완성된 sql문 실행 결과 받기 : rusult = pstmt.executeXXXX(); 앞에서 이미 전달했기 때문에 ()안에 비워두기
-
-	 *      update member set user_pwd =?
-	 *      				  user_phone =?..
-	 *      
-	 */
-	
 	/** 
 	 * 회원 추가해주는 메소드
 	 * @param m
 	 * @return
-	 */						// 여기 커니 오니까 밑에 선언 삭제
+	 */						
 	public int insertMember(Connection conn, Member m) {
 		
 		int result = 0 ;	
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("insertMember");  // 홀더(?)를 이용해서 자리만 뚫어놓은 것임
+		String sql = prop.getProperty("insertMember");  
 		
 		try {
 			
-			conn = getConnection(); // 내가 만든 스태틱메소드로 줄일 수 있음!
+			conn = getConnection(); 
 			
 			pstmt = conn.prepareStatement(sql); 
 		
@@ -105,7 +77,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			// conn은 아직 반납하면 안됨!! (트랜젝션 처리 서비스 가서 해야함!!)
+//			close(conn);
 			close(pstmt);
 		}
 		return result;
@@ -113,7 +85,7 @@ public class MemberDao {
 	
 	
 	public ArrayList<Member> selectList(Connection conn){
-		// select문 (여러행) => ResultSet => ArrayList
+		
 		ArrayList<Member> list =new ArrayList<Member>(); //[]
 	
 		PreparedStatement pstmt =null;
@@ -123,12 +95,12 @@ public class MemberDao {
 		
 		try {
 			
-			pstmt = conn.prepareStatement(sql); // 물음표가 대체하는 작업해야되는데 지금 sql에는 ? 없으니까 안해도 됨
+			pstmt = conn.prepareStatement(sql);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Member(rset.getInt("userno"), // 위에서 선선안만 햇으니까. () 이렇게만 있으면 얘는 기본, 우리는 담아올게 있으니까
+				list.add(new Member(rset.getInt("userno"),
 							   rset.getString("userid"),
 							   rset.getString("userpwd"),
 							   rset.getString("username"),
@@ -145,7 +117,7 @@ public class MemberDao {
 		}finally {
 			close(rset);
 			close(pstmt);
-			//close(conn); 이왕이면 conn을 만든 곳에서 반납하자!
+			//close(conn);
 		}
 		return list;
 		
@@ -156,25 +128,25 @@ public class MemberDao {
 	}
 	
 	public Member selectByUserId(Connection conn, String userId) {
-		// select 문 => 한 행만 조회하겠지 아이디는 고유하니까. => ResultSet => 하나니까 걍 Member객체 하나만 있어도 괜찮
+		
 		Member m = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectByUserId"); // Prepared스테이트먼트는 홀더 (?) 사용
+		String sql = prop.getProperty("selectByUserId"); 
 		
 		try {
 
 			
-			pstmt = conn.prepareStatement(sql); // 미완성된 sql문 => 바로 돌리면 큰일남 => 대체값으로 채워준 다음에 돌려야 함 받아온 유저아이디를 이용!
+			pstmt = conn.prepareStatement(sql); 
 			
 			pstmt.setString(1, userId);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				m = new Member (rset.getInt("userno"), // 위에서 선선안만 햇으니까. () 이렇게만 있으면 얘는 기본, 우리는 담아올게 있으니까
+				m = new Member (rset.getInt("userno"), 
 						   rset.getString("userid"),
 						   rset.getString("userpwd"),
 						   rset.getString("username"),
@@ -183,7 +155,7 @@ public class MemberDao {
 						   rset.getString("email"),
 						   rset.getString("phone"),
 						   rset.getString("address"),
-						   rset.getString("hobby"), // 멤버객체 m을 우리가 원하는 걸로 채움
+						   rset.getString("hobby"), 
 						   rset.getDate("enrolldate"));
 			}
 			
@@ -201,8 +173,6 @@ public class MemberDao {
 	}
 	
 	public ArrayList<Member> selectByUserName(Connection conn, String keyword) {
-		// 키워드 검색이면 여러가지 -> 어레이리스트 반환형
-		// select문 => 여러행이 나오니까 => ResultSet => ArrayList에 담아야겠다.
 		
 		ArrayList<Member> list = new ArrayList<Member>();
 
@@ -218,7 +188,7 @@ public class MemberDao {
 		String sql = prop.getProperty("selectByUserName");
 		
 		try {
-			pstmt = conn.prepareStatement(sql); // ?가 있으니까 미완성 쿼리
+			pstmt = conn.prepareStatement(sql); 
 			
 			//해결방법1의 sql문일 경우
 			//pstmt.setString(1, keyword);
@@ -262,7 +232,7 @@ public class MemberDao {
 
 		PreparedStatement pstmt = null;
 		
-		String sql = "UPDATE MEMBER "  //미완성쿼리.?
+		String sql = "UPDATE MEMBER "  
 				+  "SET USERPWD = ? "
 				+     ", EMAIL = ?"
 				+     ", PHONE = ? "
@@ -271,7 +241,7 @@ public class MemberDao {
 		
 	
 		
-		try { // try문 안에 pstmt의 값 해주는거랑 클래스~컨 스테이트먼트 다 ?
+		try {
 			
 			
 
@@ -283,12 +253,6 @@ public class MemberDao {
 			pstmt.setString(3, m.getPhone());
 			pstmt.setString(4, m.getAddress());
 			pstmt.setString(5, m.getUserId());
-			
-//			> preparedStatement 방식
-//			 * 		1) Connection 객체를 통해 PreparedStatment 객체 생성 : pstmt = conn.preparedStatement(여기에 미완성된 sql문 | 완성이 된 sql문);
-//			 *      2) pstmt에 담긴 sql문이 미완성 상태일 경우 우선은 완성시켜야됨. pstmt.setXXX(1, "대체할값");
-//			 *      3) 완성된 sql문 실행 결과 받기 : rusult = pstmt.executeXXXX(); 앞에서 이미 전달했기 때문에 ()안에 비워두기
-			
 			
 			result = pstmt.executeUpdate();
 			

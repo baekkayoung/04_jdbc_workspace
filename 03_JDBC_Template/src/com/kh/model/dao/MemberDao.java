@@ -16,31 +16,6 @@ import com.kh.model.vo.Member;
 
 public class MemberDao {
 		
-	/*
-	 * * Statement와 PreparedStatement
-	 * - 둘 다 sql문 실행하고 결과를 받아내는 객체
-	 * 
-	 * * Statement와 PreparedStatement 차이점
-	 * - Statement 같은 경우 sql문을 바로 전달하면서 실행시키는 객체
-	 * (즉, sql문을 완성 형태로 만들어 둬야함! 사용자가 입력한 값이 다 채워진 형태로!! stmt.executeUpdate(sql);)
-	 * 
-	 * 		> 기존의 statement 방식
-	 * 		1) Connection 객체를 통해 Statement 객체 생성 : stmt = conn.CreateStatement();
-	 * 		2) Statement 객체를 통해 쿼리를 돌렸는데, 이때 반드시 완성된 sql문을 실행 및 결과 받기 : 결과 =executeXXXX(완성된 sql);
-	 * 		
-	 * - PreparedStament 같은 경우 "미완성된 sql문"을 잠시 보관해둘 수 있는 객체
-	 * (즉, 사용자가 입력한 값들을 채워두지 않고 각각 들어갈 공간을 확보만 미리 해놓아도 됨!)
-	 * 단, 해당 sql문 복격적으로 실행하기 전에는 빈 공간을 사용자가 입력한 값으로 채워서 실행하긴 해야함
-	 * 		
-	 * 		> preparedStatement 방식
-	 * 		1) Connection 객체를 통해 PreparedStatment 객체 생성 : pstmt = conn.preparedStatement(여기에 미완성된 sql문 | 완성이 된 sql문);
-	 *      2) pstmt에 담긴 sql문이 미완성 상태일 경우 우선은 완성시켜야됨. pstmt.setXXX(1, "대체할값");
-	 *      3) 완성된 sql문 실행 결과 받기 : rusult = pstmt.executeXXXX(); 앞에서 이미 전달했기 때문에 ()안에 비워두기
-
-	 *      update member set user_pwd =?
-	 *      				  user_phone =?..
-	 *      
-	 */
 	
 	/** 
 	 * 회원 추가해주는 메소드

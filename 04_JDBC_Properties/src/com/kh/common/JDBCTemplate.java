@@ -57,8 +57,8 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} return conn;  // 쓸 수 있게 반환해줘
-	} // prop
+		} return conn;  
+	}
 	
 	
 	/** 2. Commit 처리해주는 메소드 (Connection 전달받아서)

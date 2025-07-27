@@ -50,7 +50,6 @@ public class ProductDao {
 					rset.getInt("stock")));
 		}
 	
-//productId, String pName, int price, String description, int stock
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,9 +60,10 @@ public class ProductDao {
 		}return list;
 	}
 	
+	
+	
 	public int insertProduct(Connection conn, Product p) {
 		int result = 0;
-		
 		PreparedStatement pstmt =null;
 		
 		String sql = prop.getProperty("insertProduct");
@@ -139,7 +139,7 @@ public class ProductDao {
 		
 		String sql = prop.getProperty("updateProduct");
 				
-				// "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
+		// "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -175,10 +175,6 @@ public class ProductDao {
 			pstmt.setString(1, "%"+keyword+"%");
 			
 			rset = pstmt.executeQuery();
-			
-			
-			
-			
 			
 			while(rset.next()) {
 				list.add(new Product(rset.getString("PRODUCT_ID"),

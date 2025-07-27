@@ -80,7 +80,8 @@ public class MemberDao {
 			pstmt.setString(9, m.getHobby());
 			
 			// >> 쿼리 돌리고 결과 받기
-			result =pstmt.executeUpdate(); // 걍 stmt에서는 result =pstmt.executeUpdate(sql); 이미 위에서 했으니까 안 넣어도 됨
+			result =pstmt.executeUpdate(); 
+			// 걍 stmt에서는 result =pstmt.executeUpdate(sql); 이미 위에서 했으니까 안 넣어도 됨
 			
 			if(result> 0) {
 				conn.commit();

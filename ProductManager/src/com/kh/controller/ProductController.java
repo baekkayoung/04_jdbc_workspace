@@ -26,9 +26,9 @@ public class ProductController {
 	
 	// 상품 추가
 	
-	public void insertProduct(String productId, String pName, int price, String description, int stock) {
-		Product p = new Product(productId, pName, price, description, stock);
-		
+	public void insertProduct(String productId, String pName, String price, String description, String stock) {
+		Product p = new Product(productId, pName, Integer.parseInt(price), description, Integer.parseInt(stock));
+		 
 		int result = new ProductService().insertProduct(p);
 		
 		if (result>0) {
@@ -41,14 +41,16 @@ public class ProductController {
 	
 	// 상품 수정
 	
-	public void updateProduct(String productId, String pName, int price, String description, int stock) {
+	public void updateProduct(String productId, String pName, String price, String description, String stock) {
 		
-		Product p = new Product();
+		
+		Product p = new Product (productId, pName, Integer.parseInt(price), description, Integer.parseInt(stock));
+		/*
 		p.setProductId(productId);
 		p.setpName(pName);
 		p.setPrice(price);
 		p.setDescription(description);
-		p.setStock(stock);
+		p.setStock(stock);*/
 		
 		int result = new ProductService().updateProduct(p);
 		
