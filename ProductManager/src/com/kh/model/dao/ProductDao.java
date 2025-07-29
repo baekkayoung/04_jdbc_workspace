@@ -113,11 +113,12 @@ public class ProductDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, p.getProductId());
-			pstmt.setString(2, p.getpName());
-			pstmt.setInt(3, p.getPrice());
-			pstmt.setString(4, p.getDescription());
-			pstmt.setInt(5, p.getStock());
+			
+			pstmt.setString(1, p.getpName());
+			pstmt.setInt(2, p.getPrice());
+			pstmt.setString(3, p.getDescription());
+			pstmt.setInt(4, p.getStock());
+			pstmt.setString(5, p.getProductId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -137,7 +138,7 @@ public class ProductDao {
 		int result = 0 ;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("updateProduct");
+		String sql = prop.getProperty("deleteProduct");
 				
 		// "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
 		

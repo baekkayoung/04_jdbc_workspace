@@ -42,12 +42,8 @@ public class ProductMenu {
 			case 5 : mc.selectBypName(inputProductName());break;
 			case 0 : System.out.println("이용해주셔서 감사합니다."); return;
 			default : System.err.println("메뉴를 잘못입력했습니다. 다시 입력하세요.");
-			
 			}
 		}
-		
-		
-		
 	}
 	
 	///////////////////////////////////////////////////////////////////////
@@ -97,7 +93,6 @@ public class ProductMenu {
 		
 		System.out.println("가격 : ");
 		String price = sc.nextLine();
-		sc.nextLine();
 		
 		System.out.println("상세 설명 : ");
 		String description =sc.nextLine();

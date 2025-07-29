@@ -15,7 +15,7 @@
 	
 	<entry key ="insertProduct">
 	INSERT 
-	  INTO MEMBER
+	  INTO PRODUCT
 	  		(
 	  		PRODUCT_ID
 		    , P_NAME
@@ -33,13 +33,12 @@
 	</entry>
 	
 	<entry key ="updateProduct">
-	UPDATE PRODUCT
-			  SET PRODUCT_ID= ? 
-				, P_NAME = ?
+	UPDATE PRODUCT 
+			SET P_NAME = ?
 				, PRICE = ? 
 				, DESCRIPTION = ?
-				, STOCK
-				WHERE PRODUCT_ID = ?
+				, STOCK = ?
+			WHERE PRODUCT_ID = ?
 	</entry>
 	
 	<entry key="deleteProduct">
